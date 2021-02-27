@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class LinkedList <T>
+public class LinkedList <T> implements Iterable<T>
 {
     static class Node<T>
     {
@@ -55,8 +55,22 @@ public class LinkedList <T>
     }
     void remove(int i)
     {
-        
+        Node temp = root;
+        int counter = 0;
+        while (root!=null)
+        {
+            counter++;
+            root = root.next;
+            if(i - 1 == counter)
+            {
+                Node x = root.next;
+                root.next = x.next;
+            }
+
+        }
+        root = temp;
     }
+
     void printList()
     {
         Node<T> temp = root;
@@ -65,5 +79,35 @@ public class LinkedList <T>
             System.out.println(temp.value);
             temp = temp.next;
         }
+    }
+
+    public Iterator<T> iterator()
+    {
+        return new Iterator<T>()
+        {
+            Node<T> node = root;
+            int counter = -1;
+            @Override
+            public boolean hasNext()
+            {
+                if(counter<size())
+                    return true;
+                else
+                {
+                    node = root;
+                    counter = -1;
+                    return false;
+                }
+            }
+
+            @Override
+            public T next()
+            {
+                Node<T> temp = node;
+                node = node.next;
+                counter++;
+                return temp.value;
+            }
+        };
     }
 }

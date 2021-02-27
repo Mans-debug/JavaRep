@@ -12,5 +12,16 @@ public class Main
         list.add(2);
         list.add(7);
         list.remove(2);
+
+        Iterator<Integer> iterator = list.iterator();
+
+        while (iterator.hasNext())
+        {
+            System.out.println(iterator.next());
+        }
+        while (iterator.hasNext())
+        {
+            System.out.println(iterator.next());
+        }
     }
 }
