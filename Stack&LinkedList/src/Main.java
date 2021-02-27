@@ -4,14 +4,13 @@ public class Main
 {
     public static void main(String[] args) throws Exception
     {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(12);
-        stack.push(43);
-        stack.push(67);
-        Iterator iterator = stack.iterator();
-        while (iterator.hasNext())
-            System.out.println(iterator.next());
-        while (iterator.hasNext())
-            System.out.println(iterator.next());
+
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(3);
+        list.add(5);
+        list.add(6);
+        list.add(2);
+        list.add(7);
+        list.remove(2);
     }
 }

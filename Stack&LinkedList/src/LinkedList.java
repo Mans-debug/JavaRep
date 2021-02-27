@@ -53,4 +53,17 @@ public class LinkedList <T>
         }
         return temp.value;
     }
+    void remove(int i)
+    {
+        
+    }
+    void printList()
+    {
+        Node<T> temp = root;
+        while (temp!=null)
+        {
+            System.out.println(temp.value);
+            temp = temp.next;
+        }
+    }
 }
