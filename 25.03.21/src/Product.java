@@ -16,6 +16,7 @@ public class Product
         else
             return false;
     }
+
     public Boolean equals(String name)
     {
         if (this.name.equals(name))

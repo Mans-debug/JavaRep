@@ -15,16 +15,19 @@ public class ProductList
         this.file = file;
         List<Product> productList = new ArrayList<>();
         Gson gson = new Gson();
-        try
+        if(getList()==null)
         {
-            FileWriter writer = new FileWriter(file);
-            String str = gson.toJson(productList);
-            writer.append(str);
-            writer.flush();
-            writer.close();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
+            try
+            {
+                FileWriter writer = new FileWriter(file);
+                String str = gson.toJson(productList);
+                writer.append(str);
+                writer.flush();
+                writer.close();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
 
 
@@ -112,13 +115,15 @@ public class ProductList
         return flag;
     }
 
-    public void printAll()
+    public String toString()
     {
         ArrayList<Product> arrayList = getList();
+        String res = "";
         for(Product i : arrayList)
         {
-            System.out.println(i);
+            res += i + " ";
         }
+        return res;
     }
 
     public Boolean remove(String name)
