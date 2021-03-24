@@ -15,10 +15,12 @@ public class ProductList
         this.file = file;
         List<Product> productList = new ArrayList<>();
         Gson gson = new Gson();
-        if(getList()==null)
+        if (getList() == null)
         {
+
             try
             {
+                new FileWriter(file, false).close();// deletes the contents of the file
                 FileWriter writer = new FileWriter(file);
                 String str = gson.toJson(productList);
                 writer.append(str);
@@ -119,17 +121,19 @@ public class ProductList
     {
         ArrayList<Product> arrayList = getList();
         String res = "";
-        for(Product i : arrayList)
+        for (Product i : arrayList)
         {
-            res += i + " ";
+
+                res += i + ", ";
+
         }
-        return res;
+        return ('{' + res + '}').replace(", }", "}");
     }
 
     public Boolean remove(String name)
     {
         ArrayList<Product> arrayList = getList();
-        if(arrayList == null)
+        if (arrayList == null)
         {
             System.out.println("List is null");
             return false;
@@ -137,13 +141,13 @@ public class ProductList
         Boolean flag = false;
         for (Product i : arrayList)
         {
-            if(i.equals(name))
+            if (i.equals(name))
             {
                 flag = true;
                 arrayList.remove(i);
             }
         }
-        if(!flag)
+        if (!flag)
             return flag;
         rewrite(arrayList);
         return flag;
@@ -152,18 +156,18 @@ public class ProductList
     public Boolean remove(int index)
     {
         ArrayList<Product> arrayList = getList();
-        if(arrayList == null)
+        if (arrayList == null)
         {
             System.out.println("List is null");
             return false;
         }
         Boolean flag = false;
-        if(index<arrayList.size())
+        if (index < arrayList.size())
         {
             flag = true;
             arrayList.remove(index);
         }
-        if(!flag)
+        if (!flag)
             return flag;
         rewrite(arrayList);
         return flag;

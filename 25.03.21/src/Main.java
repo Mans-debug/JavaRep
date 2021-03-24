@@ -3,21 +3,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Main
 {
     public static void main(String[] args) throws IOException
     {
-        File file = new File("C:\\Users\\mansu\\IdeaProjects\\25.03.21\\src\\productList.json");
+        File file = new File(".\\productList.json");
+        new FileWriter(file, false).close();// deletes the contents of the file
         ProductList list = new ProductList(file);
-       list.add(new Product("Санек", 2024));
+        list.add(new Product("Apple", 2));
+        list.add(new Product("Car", 1));
+        list.add(new Product("Chair", 12));
+        list.add(new Product("Bags of weed", 2));
+        System.out.println(list);
+
 
     }
 }

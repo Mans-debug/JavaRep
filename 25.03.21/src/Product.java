@@ -38,6 +38,6 @@ public class Product
     public String toString()
     {
 
-        return name + "\t" + quantity;
+        return name + " " + quantity;
     }
 }
