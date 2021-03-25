@@ -1,7 +1,10 @@
+import com.google.gson.Gson;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Launch
@@ -12,7 +15,7 @@ public class Launch
         int i = 0;
         for (Customer cust : customers)
         {
-            if (cust.customerName == name)
+            if (cust.customerName.equals(name))
                 return i;
                 i++;
         }
@@ -24,7 +27,7 @@ public class Launch
         ArrayList<Customer> customers = new ArrayList<>();
         try
         {
-            Scanner sc = new Scanner(new File("C:\\Users\\mansu\\IdeaProjects\\Project\\src\\orders.txt"));
+            Scanner sc = new Scanner(new File("C:\\Users\\mansu\\IdeaProjects\\JavaRep\\Project\\src\\orders.txt"));
 
                 int i = 0;
                 while (true)
@@ -46,9 +49,10 @@ public class Launch
                     Customer customer = new Customer(custName);
                     City city = new City(cityName);
                     Order order = new Order(productName, quantity);
+                    int indexOfCustomer = getCustomer(customers, custName);
                     if(custNames.contains(custName))//если в списке есть покупатель
                     {
-                        int indexOfCustomer = getCustomer(customers, custName);
+
                         if(customers.get(indexOfCustomer).ebaniyMetod(cityName))//если был в этом городе
                         {
                             int cityIndex = customers.get(indexOfCustomer).getCityIndex(cityName);
@@ -68,30 +72,64 @@ public class Launch
                             city.customerOrders = new ArrayList<>();
                             city.customerOrders.add(order);
                             customers.get(indexOfCustomer);
-                            customers.get(indexOfCustomer).cityList = new ArrayList<>();
                             customers.get(indexOfCustomer).cityList.add(city);
+
                         }
                     }
                     else //добавить нового кастомера
                     {
+                        custNames.add(custName);
+
+                        city.customerOrders = new ArrayList<>();
+                        city.customerOrders.add(order);
                         customer.cityList = new ArrayList<>();
                         customer.cityList.add(city);
-                        int indexOfCity = customer.cityList.indexOf(city);
-                        customer.cityList.get(indexOfCity).customerOrders = new ArrayList<>();
-                        customer.cityList.get(indexOfCity).customerOrders.add(order);
+
+
+
                         customers.add(customer);
                     }
-                    System.out.println(i++);
+
                 }
 
         } catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
-        int x = 4;
-        for (Customer i: customers)
-            System.out.println(i);
-        /*System.out.println(customers);*/
+
+        System.out.println(customers);
+        Comparator<Customer> nameCityComparator =
+                new BuyerByNameComparator().
+                thenComparing(new BuyerByCityCountComparator()).
+                thenComparing(new BuyerByOrdersCountComparator());
+
+        TreeSet<Customer> sortedByName = new TreeSet<Customer>(nameCityComparator);
+        sortedByName.addAll(customers);
+
+        Comparator<Customer> orderCityName = new BuyerByOrdersCountComparator().
+                thenComparing(new BuyerByCityCountComparator()).
+                thenComparing(new BuyerByNameComparator());
+        TreeSet<Customer> sortedByOrder = new TreeSet<>(orderCityName);
+        sortedByOrder.addAll(customers);
+
+        Gson gson = new Gson();
+
+        try
+        {
+            File nameSort = new File(".\\nameSort.txt");
+            File orderSort = new File(".\\orderSort.txt");
+            FileWriter writer = new FileWriter(nameSort);
+            gson.toJson(sortedByName,writer);
+            writer.close();
+            writer = new FileWriter(orderSort);
+            gson.toJson(sortedByOrder, writer);
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            e.fillInStackTrace();
+        }
+
 
 
     }

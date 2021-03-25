@@ -19,7 +19,7 @@ public class City
             return false;
         for(Order i: customerOrders)
         {
-            if(i.name == orderName)
+            if(i.name.equals(orderName))
                 return true;
         }
         return res;
@@ -29,19 +29,20 @@ public class City
         int j = 0;
         for(Order i: customerOrders)
         {
-            if(i.name == name)
+            if(i.name.equals(name))
                 return j;
                 j++;
         }
         return -1;
     }
 
+    @Override
     public String toString()
     {
         String res = "";
-        res += cityName + "\n";
-        for(Order i : customerOrders)
-            res += i.toString();
+        res += cityName + ":\n";
+        for(Order i: customerOrders)
+            res += i.toString() + "\n";
         return res;
     }
 }

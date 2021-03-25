@@ -15,11 +15,11 @@ public class Customer
     Boolean ebaniyMetod(String cityName)
     {
         boolean res = false;
-        if(cityName == null)
+        if(cityList == null)
             return false;
         for (City city: cityList)
         {
-            if(city.cityName == cityName)
+            if(city.cityName.equals(cityName))
                 return true;
         }
         return res;
@@ -31,18 +31,22 @@ public class Customer
         int i = 0;
         for(City j : cityList)
         {
-            if(j.cityName == name)
+            if(j.cityName.equals(name))
                 return i;
                 i++;
         }
+
         return res;
     }
+
+    @Override
     public String toString()
     {
         String res = "";
-        res += customerName + "\n";
-        for(City i : cityList)
-            res += i.toString();
+        res += customerName + ":\n";
+                for(City i : cityList)
+                    res += i.toString()+"\n";
+                res += "_________________________________________________________\n";
         return res;
     }
 }
