@@ -57,9 +57,7 @@ public class ProductList
         Gson gson = new Gson();
         ArrayList<Product> arrayList = null;
         // we need this to convert json to arrayList correctly
-        Type type = new TypeToken<ArrayList<Product>>()
-        {
-        }.getType();
+        Type type = new TypeToken<ArrayList<Product>>() {}.getType();
         try
         {
             arrayList = (ArrayList<Product>) gson.fromJson(new FileReader(file), type);
@@ -139,16 +137,18 @@ public class ProductList
             return false;
         }
         Boolean flag = false;
+        Product rmProduct = null;
         for (Product i : arrayList)
         {
             if (i.equals(name))
             {
                 flag = true;
-                arrayList.remove(i);
+                rmProduct = i;
             }
         }
         if (!flag)
             return flag;
+        arrayList.remove(rmProduct);
         rewrite(arrayList);
         return flag;
     }

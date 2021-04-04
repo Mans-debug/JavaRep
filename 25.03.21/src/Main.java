@@ -18,7 +18,9 @@ public class Main
         list.add(new Product("Chair", 12));
         list.add(new Product("Bags of weed", 2));
         System.out.println(list);
-
+        System.out.println("Now we will remove Apple");
+        list.remove("Apple");
+        System.out.println(list);
 
     }
 }
