@@ -1,5 +1,7 @@
 import com.google.gson.Gson;
 
+import java.io.*;
+
 public class main
 {
     public static void main(String[] args)
@@ -9,15 +11,23 @@ public class main
         shapes[1]  = new Rectangle(23, 7);
         shapes[2]  = new Circle(8);
         shapes[3]  = new Circle(54);
-       /* for (int i = 0; i < shapes.length; i++)
-        {
-            shapes[i].showArea();
-        }*/
-        Gson gson = new Gson();
-        for (int i = 0; i < shapes.length; ++i)
-        {
-            System.out.println(gson.toJson(shapes[i]));
-        }
+
+       try
+       {
+           File file = new File(".\\yourlife.txt");
+           FileOutputStream fileOutputStream
+                   = new FileOutputStream(file);
+           ObjectOutputStream objectOutputStream
+                   = new ObjectOutputStream(fileOutputStream);
+           objectOutputStream.writeObject(shapes);
+           objectOutputStream.flush();
+           objectOutputStream.close();
+       }
+       catch (Exception e)
+       {
+           System.out.println("Ты долбоеб");
+           return;
+       }
 
     }
 }

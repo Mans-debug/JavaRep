@@ -45,4 +45,13 @@ public class City
             res += i.toString() + "\n";
         return res;
     }
+
+    public Boolean equals(City city)
+    {
+        return this.cityName.equals(city.cityName);
+    }
+    public Boolean equals(String name)
+    {
+        return this.cityName.equals(name);
+    }
 }

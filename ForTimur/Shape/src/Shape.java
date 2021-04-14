@@ -1,4 +1,6 @@
-public abstract class Shape
+import java.io.Serializable;
+
+public abstract class Shape implements Serializable
 {
     private double height;
     private double width;

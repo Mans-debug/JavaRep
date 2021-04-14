@@ -6,10 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Launch
 {
-    public static int getCustomer(ArrayList<Customer> customers,String name)
+    public static int getCustomer(ArrayList<Customer> customers, String name)
     {
         int res = 0;
         int i = 0;
@@ -17,10 +18,11 @@ public class Launch
         {
             if (cust.customerName.equals(name))
                 return i;
-                i++;
+            i++;
         }
         return res;
     }
+
     public static void main(String[] args)
     {
         ArrayList<String> custNames = new ArrayList<>();

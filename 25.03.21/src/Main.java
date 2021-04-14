@@ -19,7 +19,8 @@ public class Main
         list.add(new Product("Bags of weed", 2));
         System.out.println(list);
         System.out.println("Now we will remove Apple");
-        list.remove("Apple");
+        list.remove(0);
+        list.changeQuant("Car", 4);
         System.out.println(list);
 
     }

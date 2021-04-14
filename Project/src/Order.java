@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Order
 {
     String name;
@@ -13,5 +15,10 @@ public class Order
     public String toString()
     {
         return name + " " + quantity;
+    }
+
+    public boolean equals(String name)
+    {
+        return this.name.equals(name);
     }
 }

@@ -49,4 +49,9 @@ public class Customer
                 res += "_________________________________________________________\n";
         return res;
     }
+
+    Boolean equals(String name)
+    {
+        return this.customerName.equals(name);
+    }
 }
