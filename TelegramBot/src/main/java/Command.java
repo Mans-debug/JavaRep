@@ -11,4 +11,5 @@ public @interface Command
     public String args() default "no args";
     public String description() default "no description";
     public boolean inProgress() default true;
+    public boolean takesArgs() default true;
 }
