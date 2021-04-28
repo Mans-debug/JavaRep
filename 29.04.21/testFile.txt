@@ -1,0 +1,1 @@
+[{"name":"алма","quantity":20},{"name":"афлисун","quantity":15},{"name":"дyртпочмак","quantity":4}]
