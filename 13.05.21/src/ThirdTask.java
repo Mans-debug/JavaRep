@@ -10,16 +10,17 @@ public class ThirdTask {
         Scanner sc = new Scanner(file);
         HashMap<String, Integer> map = new HashMap<>();
         //one way
+
        sc.tokens()
                 .map(x -> x.split("[|]"))
                 .map(x -> map.containsKey(x[0]) ?
                         map.put(x[0], map.get(x[0]) + Integer.parseInt(x[1])) :
-                        map.put(x[0], Integer.parseInt(x[1])));
+                        map.put(x[0], Integer.parseInt(x[1]))).collect(Collectors.toList());
 
         map.entrySet().stream().forEach(x -> System.out.println(x.getKey() + " " + x.getValue()));
         
         //another way
-        String[] s = sc.tokens().toArray(String[]::new);
+        /*String[] s = sc.tokens().toArray(String[]::new);
         var map1 = Arrays.stream(s).map(x -> x.split("[|]"))
                 .collect(Collectors.groupingBy(x -> x[0]))
                 .entrySet()
@@ -28,6 +29,6 @@ public class ThirdTask {
                         (Collectors.toMap(x -> x.getKey(), x -> x.getValue()
                                 .stream().map(a -> Integer.parseInt(a[1])).reduce((z, t) -> z + t ).get()));
 
-        map1.entrySet().stream().forEach(x -> System.out.println(x.getKey() + " " + x.getValue()));
+        map1.entrySet().stream().forEach(x -> System.out.println(x.getKey() + " " + x.getValue()));*/
     }
 }
