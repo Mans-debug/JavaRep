@@ -16,7 +16,6 @@ public class WriterReader implements Runnable {
         if (mode.toLowerCase().equals("reader")) {
             parameter = 2;
         }
-
     }
 
     public void serialize(Person person) {
@@ -35,12 +34,12 @@ public class WriterReader implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.log(Level.INFO, "A person has been added " + person.name());
+        logger.log(Level.INFO, "\u001B[32mA person has been added " + person.name() + "\u001B[0m");
     }
 
     public void deserialize() {
         var people = getArray();
-        logger.log(Level.INFO, people.get(people.size() - 1).toString());
+        logger.log(Level.INFO, "\u001B[32m"+people.get(people.size() - 1).toString()+"\u001B[0m");
     }
 
     public ArrayList<Person> getArray() {
