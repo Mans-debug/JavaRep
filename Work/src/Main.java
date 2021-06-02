@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collector;
@@ -31,15 +32,20 @@ public class Main {
                 x-> x.getKey(),
                 x->x.getValue().stream().collect(Collectors.groupingBy(z -> z.prod()))
         ));
-        var map3 = map1.entrySet().stream()
+       var map2 =  map1.entrySet().stream()
                 .collect(Collectors.toMap(
-                        x->x.getKey(),
-                        x -> x.getValue().entrySet().stream().map(z -> z.getValue() + " " +
-                                z.getValue().stream().mapToInt(t -> t.quant()).sum())
-                                .toList()
-                ));
-        map3.entrySet().stream().map(x -> x.getKey() + " " +
-                x.getValue().stream().)
+                        x -> x.getKey(),
+                        x -> x.getValue().entrySet().stream()
+                        .map(z -> z.getKey() + " " +
+                                z.getValue()
+                                        .stream()
+                                        .map(t -> t.quant())
+                                        .reduce(Integer::sum).get().toString())
+                        .sorted((m,n) -> -Integer.compare(
+                                Integer.parseInt(m.split(" ")[1]),
+                                Integer.parseInt(n.split(" ")[1]))
+                        ).findFirst().get()));
+                map2.entrySet().stream().forEach(x -> System.out.println(x.getKey() + " "+ x.getValue()));
 
 
     }
